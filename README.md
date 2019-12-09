@@ -1,3 +1,4 @@
+[![Powered by Flame](https://img.shields.io/badge/Powered%20by-%F0%9F%94%A5-orange.svg?style=for-the-badge)](https://flame-engine.org)
 # MazeBall
 
 Simple 2D game created along with my Medium posts in Flutter using Flame and Box2D
