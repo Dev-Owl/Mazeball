@@ -1,19 +1,37 @@
 import 'package:flame/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mazeball/game.dart';
+import 'package:mazeball/Views/mainMenu.dart';
 import 'dart:async';
+
+//TODO Add a proper menu screen, see notes
+//TODO Support level reset, track time 
+//TODO Store highscore (time to finish by maze size)
+//TODO Add setting screen (maze size)
+
+
 
 void main() async {
   //Make sure flame is ready before we launch our game
   await setupFlame();
-  var game = new MazeBallGame();
-  runApp(game.widget);
+  runApp(App());
 }
 
 /// Setup all Flame specific parts
 Future setupFlame() async {
+  WidgetsFlutterBinding.ensureInitialized(); //Since flutter upgrade this is required
   var flameUtil = Util();
   await flameUtil.fullScreen();
-  await flameUtil.setOrientation(DeviceOrientation.portraitUp); //Force the app to be in this screen mode
+  await flameUtil.setOrientation(
+      DeviceOrientation.portraitUp); //Force the app to be in this screen mode
 }
+
+class App extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: StartScreen(),
+    );
+  }
+}
+

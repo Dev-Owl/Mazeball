@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
+    <CLASSES>
+      <root url="file://$USER_HOME$/data/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers-0.13.2" />
+      <root url="file://$USER_HOME$/data/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/sensors-0.4.1+1" />
+      <root url="file://$USER_HOME$/data/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.4.0" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
