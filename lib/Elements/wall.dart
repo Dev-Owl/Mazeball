@@ -26,8 +26,8 @@ class Wall {
     BodyDef bd = BodyDef();
     bd.linearVelocity = Vector2.zero();
     bd.position = scaleVectoreBy(startPoint, scaleFactor);
-    bd.type = BodyType
-        .STATIC; //Static objects are not effected by gravity but have collisions
+    //Static objects are not effected by gravity but have collisions
+    bd.type = BodyType.STATIC;
     body = game.world.createBody(bd);
     body.userData = this; //save a ref to the current object
     //Define body properties like weight and density
@@ -37,7 +37,6 @@ class Wall {
     fd.friction = 0;
     fd.shape = shape;
     body.createFixtureFromFixtureDef(fd);
-
     //Create a Path for drawing based on vecotor list, rquies a convert to Offset
     _path = Path();
     _path.addPolygon(
@@ -70,14 +69,12 @@ class Wall {
 
   void render(Canvas canvas) {
     canvas.save();
-    canvas.translate(
-        body.position.x,
-        body.position
-            .y); //Canvas (0,0) will be the start point of the wall -> easier to draw
+    //Canvas (0,0) will be the start point of the wall -> easier to draw
+    canvas.translate(body.position.x, body.position.y);
     canvas.drawPath(_path, _paint);
     canvas.restore();
   }
 
-  //A wall has nothing todo, it just sits there ... it's a wall
-  void update(double t) {}
+  //A wall has nothing todo, it just sits there ... it's a wall so no update
+  
 }
