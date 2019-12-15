@@ -5,11 +5,15 @@ import 'package:mazeball/game.dart';
 import 'package:theseus/theseus.dart';
 
 class MazeBuilder {
+  //Size of the maze
   int _width;
   int _height;
+  //Size for each maze cell
+  Size cellSize;
+  //The generator
   OrthogonalMaze _mazeGenerator;
   final MazeBallGame game;
-  Size cellSize;
+  //All walls of the maze
   final List<Wall> walls = new List();
 
   MazeBuilder(this.game, {int width = 8, int height = 8}) {
@@ -23,7 +27,9 @@ class MazeBuilder {
   }
 
   void generateMaze() {
+    //Clear walls
     walls.clear();
+    //Generate a new maze
     var mazeOption = MazeOptions(width: _width, height: _height);
     _mazeGenerator = OrthogonalMaze(mazeOption);
     _mazeGenerator.generate();
@@ -34,7 +40,7 @@ class MazeBuilder {
       start,
       box2d.Vector2(start.x, start.y + cellSize.height),
     ));
-    //Generating a cell row by row
+    //Generating cells row by row
     for (var y = 0; y < _height; ++y) {
       var py = y * cellSize.height;
       for (var x = 0; x < _width; ++x) {
@@ -90,12 +96,9 @@ class MazeBuilder {
       ));
     }
   }
-
+  //Draw all walls of the mazes
   void render(Canvas c) {
     walls.forEach((f) => f.render(c));
   }
 
-  void update(double t) {
-    //TODO Implement update
-  }
 }
