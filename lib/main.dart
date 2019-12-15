@@ -4,8 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:mazeball/Views/mainMenu.dart';
 import 'dart:async';
 
-//TODO Add a proper menu screen, see notes
-//TODO Support level reset, track time 
+//TODO Support track time 
 //TODO Store highscore (time to finish by maze size)
 //TODO Add setting screen (maze size)
 
