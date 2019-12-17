@@ -6,6 +6,8 @@ import 'package:mazeball/Views/optionBackground.dart';
 import 'package:mazeball/Views/soonDialog.dart';
 import 'package:mazeball/game.dart';
 
+//TODO load and write maze size to shared settings
+
 class OptionScreen extends StatefulWidget {
   @override
   _OptionScreenState createState() => _OptionScreenState();
@@ -26,10 +28,6 @@ class _OptionScreenState extends State<OptionScreen> {
     game.blockResize = true;
     widthController.text = savedWidth.toString();
     heightController.text = savedHeight.toString();
-   /* widthController
-        .addListener(() => validateInput(widthController, savedWidth));
-    heightController
-        .addListener(() => validateInput(heightController, savedHeight));*/
   }
 
   void validateInput(TextEditingController controller, int savedValue) {
