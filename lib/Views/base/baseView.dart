@@ -6,6 +6,7 @@ enum GameView {
   MainMenuBackground,
   Playing,
   Win,
+  Options,
 }
 
 abstract class BaseView {

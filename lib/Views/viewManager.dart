@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:mazeball/Views/base/baseView.dart';
 import 'package:mazeball/Views/mainMenuBackground.dart';
+import 'package:mazeball/Views/optionBackground.dart';
 import 'package:mazeball/Views/playingView.dart';
 import 'package:mazeball/game.dart';
 import 'base/viewSwtichMessage.dart';
@@ -22,6 +23,7 @@ class ViewManager {
       views = List();
       views.add(PlayingView(GameView.Playing, this));
       views.add(MainMenuBackground(GameView.MainMenuBackground, this));
+      views.add(OptionBackgroundView(GameView.Options, this));
     }
   }
 

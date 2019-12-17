@@ -5,6 +5,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mazeball/Views/base/baseView.dart';
+import 'package:mazeball/Views/base/viewSwtichMessage.dart';
 import 'package:mazeball/Views/viewManager.dart';
 
 class GameWidget extends StatefulWidget {
@@ -56,6 +57,7 @@ class MazeBallGame extends Game {
   ViewManager _viewManager;
 
   bool pauseGame = false;
+  bool blockResize = false;
 
   MazeBallGame({GameView startView = GameView.Playing}) {
     world = new World.withPool(
@@ -72,6 +74,10 @@ class MazeBallGame extends Game {
   }
 
   void resize(Size size) {
+    if(blockResize && screenSize !=null)
+    {
+      return;
+    }
     //Store size and related rectangle
     screenSize = size;
     _screenRect = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
@@ -111,6 +117,10 @@ class MazeBallGame extends Game {
     else{
       pauseGame = false;
     }
+  }
+
+  void sendMessageToActiveState(ViewSwitchMessage message) async{
+    _viewManager.activeView?.setActive(message: message);
   }
 
   Function() pop;

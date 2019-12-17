@@ -25,6 +25,16 @@ class MazeBuilder {
       game.screenSize.height / (height),
     );
   }
+  void resetMaze({int width = 8, int height = 8}){
+    _width = width;
+    _height = height;
+    //Calculate the cell size to fit the screen
+    cellSize = Size(
+      game.screenSize.width / (width),
+      game.screenSize.height / (height),
+    );
+    generateMaze();
+  }
 
   void generateMaze() {
     //Clear walls

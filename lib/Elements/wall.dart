@@ -33,7 +33,7 @@ class Wall {
     //Define body properties like weight and density
     FixtureDef fd = FixtureDef();
     fd.density = 20;
-    fd.restitution = 1;
+    fd.restitution = 0;
     fd.friction = 0;
     fd.shape = shape;
     body.createFixtureFromFixtureDef(fd);
