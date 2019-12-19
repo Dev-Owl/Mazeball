@@ -38,7 +38,7 @@ class Ball {
     FixtureDef fd = FixtureDef();
     fd.density = 10;
     fd.restitution = 0;
-    fd.friction = 0.01;
+    fd.friction = 0;
     fd.shape = shape;
     body.createFixtureFromFixtureDef(fd);
     //Link to the sensor using dart Stream

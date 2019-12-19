@@ -8,6 +8,7 @@ import 'package:mazeball/Views/base/baseView.dart';
 import 'package:mazeball/Views/viewManager.dart';
 import 'package:mazeball/helper.dart';
 import 'package:mazeball/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'base/viewSwtichMessage.dart';
 
@@ -29,10 +30,18 @@ class PlayingView extends BaseView {
           viewManager.game,
           scaleVectoreBy(Vector2(Wall.wallWidth * 4, Wall.wallWidth * 4),
               viewManager.game.screenSize.width / viewManager.game.scale));
-      //_generateOuterWalls();
-      mazeBuilder = MazeBuilder(viewManager.game);
-      mazeBuilder.generateMaze();
+      initMaze();
     }
+  }
+  void initMaze()  {
+    var savedHeight = sharedPrefs.getInt("maze_height") ?? 8;
+    var savedWidth = sharedPrefs.getInt("maze_width") ?? 8;
+    mazeBuilder = MazeBuilder(
+      this.viewManager.game,
+      height: savedHeight,
+      width: savedWidth,
+    );
+    mazeBuilder.generateMaze();
   }
 
   @override

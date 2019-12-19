@@ -17,15 +17,9 @@ class MazeBuilder {
   final List<Wall> walls = new List();
 
   MazeBuilder(this.game, {int width = 8, int height = 8}) {
-    _width = width;
-    _height = width;
-    //Calculate the cell size to fit the screen
-    cellSize = Size(
-      game.screenSize.width / (width),
-      game.screenSize.height / (height),
-    );
+    resetMaze(width: width,height: height,buildMaze: false);
   }
-  void resetMaze({int width = 8, int height = 8}){
+  void resetMaze({int width = 8, int height = 8, bool buildMaze = true}) {
     _width = width;
     _height = height;
     //Calculate the cell size to fit the screen
@@ -33,7 +27,9 @@ class MazeBuilder {
       game.screenSize.width / (width),
       game.screenSize.height / (height),
     );
-    generateMaze();
+    if (buildMaze) {
+      generateMaze();
+    }
   }
 
   void generateMaze() {
@@ -106,9 +102,9 @@ class MazeBuilder {
       ));
     }
   }
+
   //Draw all walls of the mazes
   void render(Canvas c) {
     walls.forEach((f) => f.render(c));
   }
-
 }

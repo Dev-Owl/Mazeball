@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mazeball/Views/base/baseView.dart';
 import 'package:mazeball/Views/base/viewSwtichMessage.dart';
 import 'package:mazeball/Views/viewManager.dart';
+import 'package:wakelock/wakelock.dart';
 
 class GameWidget extends StatefulWidget {
   @override
@@ -113,8 +114,10 @@ class MazeBallGame extends Game {
   void lifecycleStateChange(AppLifecycleState state) {
     if (state != AppLifecycleState.resumed) {
       pauseGame = true;
+      Wakelock.disable();
     }
     else{
+      Wakelock.enable();
       pauseGame = false;
     }
   }

@@ -5,8 +5,7 @@ import 'package:mazeball/Views/base/viewSwtichMessage.dart';
 import 'package:mazeball/Views/optionBackground.dart';
 import 'package:mazeball/Views/soonDialog.dart';
 import 'package:mazeball/game.dart';
-
-//TODO load and write maze size to shared settings
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OptionScreen extends StatefulWidget {
   @override
@@ -18,7 +17,7 @@ class _OptionScreenState extends State<OptionScreen> {
   final widthController = TextEditingController();
   final heightController = TextEditingController();
 
-  int savedHeight = 10;
+  int savedHeight = 8;
   int savedWidth = 8;
 
   @override
@@ -26,6 +25,13 @@ class _OptionScreenState extends State<OptionScreen> {
     super.initState();
     game = MazeBallGame(startView: GameView.Options);
     game.blockResize = true;
+    loadSettings();
+  }
+
+  Future loadSettings() async{
+    var prefs = await SharedPreferences.getInstance();
+    savedHeight = prefs.getInt("maze_height") ?? 8;
+    savedWidth = prefs.getInt("maze_width") ?? 8;
     widthController.text = savedWidth.toString();
     heightController.text = savedHeight.toString();
   }
@@ -73,7 +79,7 @@ class _OptionScreenState extends State<OptionScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: <Widget>[
-          game.widget,
+          game?.widget ?? SizedBox(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -143,12 +149,10 @@ class _OptionScreenState extends State<OptionScreen> {
                     RaisedButton(
                       child: Text("Save"),
                       onPressed: () async {
-                        await showDialog(
-                            context: context,
-                            builder: (BuildContext buildContext) {
-                              return SoonDialog();
-                            });
-                          Navigator.pop(context);
+                        var prefs = await SharedPreferences.getInstance();
+                        await prefs.setInt("maze_width", toInt(widthController.text,defaultValue: 8));
+                        await prefs.setInt("maze_height", toInt(heightController.text,defaultValue: 8));
+                        Navigator.pop(context);
                       },
                     )
                   ],

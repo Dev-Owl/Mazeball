@@ -4,12 +4,15 @@ import 'package:mazeball/Elements/mazeBuilder.dart';
 import 'package:mazeball/Views/base/baseView.dart';
 import 'package:mazeball/Views/base/viewSwtichMessage.dart';
 import 'package:mazeball/Views/viewManager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
 
 class OptionBackgroundMessage {
   int width;
   int height;
 
-  OptionBackgroundMessage(this.width,this.height);
+  OptionBackgroundMessage(this.width, this.height);
 
   OptionBackgroundMessage.eightByEight() {
     width = 8;
@@ -24,12 +27,22 @@ class OptionBackgroundView extends BaseView {
       : super(view, viewManager);
 
   @override
-  void moveToBackground({ViewSwitchMessage message}) {
-  }
+  void moveToBackground({ViewSwitchMessage message}) {}
 
   @override
   void render(Canvas c) {
     _mazeBuilder?.render(c);
+  }
+
+  void initMaze() {
+    var savedHeight = sharedPrefs.getInt("maze_height") ?? 8;
+    var savedWidth = sharedPrefs.getInt("maze_width") ?? 8;
+    _mazeBuilder = MazeBuilder(
+      this.viewManager.game,
+      height: savedHeight,
+      width: savedWidth,
+    );
+    _mazeBuilder.generateMaze();
   }
 
   @override
@@ -43,12 +56,7 @@ class OptionBackgroundView extends BaseView {
 
     if (initRequired) {
       initRequired = false;
-      _mazeBuilder = MazeBuilder(
-        this.viewManager.game,
-        height: details.height,
-        width: details.width,
-      );
-      _mazeBuilder.generateMaze();
+      initMaze();
     } else {
       _mazeBuilder.resetMaze(
         width: details.width,

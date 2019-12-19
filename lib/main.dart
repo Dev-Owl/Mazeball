@@ -4,10 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:mazeball/Views/mainMenu.dart';
 import 'dart:async';
 
-//TODO Store highscore (time to finish by maze size)
+import 'package:shared_preferences/shared_preferences.dart';
+
 //TODO Keep screen active -> no sleep
 
-
+SharedPreferences sharedPrefs;
 
 void main() async {
   //Make sure flame is ready before we launch our game
@@ -18,6 +19,7 @@ void main() async {
 /// Setup all Flame specific parts
 Future setupFlame() async {
   WidgetsFlutterBinding.ensureInitialized(); //Since flutter upgrade this is required
+  sharedPrefs = await SharedPreferences.getInstance();
   var flameUtil = Util();
   await flameUtil.fullScreen();
   await flameUtil.setOrientation(
