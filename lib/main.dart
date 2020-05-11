@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //TODO Keep screen active -> no sleep
 
 SharedPreferences sharedPrefs;
+Util flameUtil;
 
 void main() async {
   //Make sure flame is ready before we launch our game
@@ -20,10 +21,11 @@ void main() async {
 Future setupFlame() async {
   WidgetsFlutterBinding.ensureInitialized(); //Since flutter upgrade this is required
   sharedPrefs = await SharedPreferences.getInstance();
-  var flameUtil = Util();
+  flameUtil = Util();
   await flameUtil.fullScreen();
   await flameUtil.setOrientation(
       DeviceOrientation.portraitUp); //Force the app to be in this screen mode
+ 
 }
 
 class App extends StatelessWidget {
